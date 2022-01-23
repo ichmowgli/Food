@@ -261,19 +261,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  new MenuCard("img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 9, '.menu .container', 'menu__item').render();
-  new MenuCard("img/tabs/elite.jpg", "elite", 'Меню “Премиум”', 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 14, '.menu .container', 'menu__item').render();
-  new MenuCard("img/tabs/post.jpg", "post", 'Меню "Постное"', 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 21, '.menu .container', 'menu__item').render(); //Forms
+  new MenuCard("/img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 9, '.menu .container', 'menu__item').render();
+  new MenuCard("/img/tabs/elite.jpg", "elite", 'Меню “Премиум”', 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 14, '.menu .container', 'menu__item').render();
+  new MenuCard("/img/tabs/post.jpg", "post", 'Меню "Постное"', 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 21, '.menu .container', 'menu__item').render(); //Forms
 
   const forms = document.querySelectorAll('form');
   const message = {
-    loading: 'img/form/spinner.svg',
+    loading: '/img/form/spinner.svg',
     success: 'Спасибо! Скоро мы с Вами свяжемся',
     failure: 'Что-то пошло не так'
   };
   forms.forEach(item => {
     postData(item);
   });
+  /**
+   * @param {HTMLFormElement} form Form element to listen for
+   */
 
   function postData(form) {
     form.addEventListener('submit', e => {
@@ -295,7 +298,8 @@ window.addEventListener('DOMContentLoaded', () => {
       });
       const json = JSON.stringify(object);
       request.send(json);
-      request.addEventListener('load', () => {
+
+      request.onload = function () {
         if (request.status === 200) {
           console.log(request.response);
           showThanksModal(message.success);
@@ -304,7 +308,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
           showThanksModal(message.failure);
         }
-      });
+      };
     });
   }
 

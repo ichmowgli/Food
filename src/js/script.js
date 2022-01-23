@@ -186,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     new MenuCard(
-        "img/tabs/vegy.jpg",
+        "/img/tabs/vegy.jpg",
         "vegy",
         'Меню "Фитнес"',
         'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
@@ -196,7 +196,7 @@ window.addEventListener('DOMContentLoaded', () => {
     ).render();
 
     new MenuCard(
-        "img/tabs/elite.jpg",
+        "/img/tabs/elite.jpg",
         "elite",
         'Меню “Премиум”',
         'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
@@ -206,7 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
     ).render();
 
     new MenuCard(
-        "img/tabs/post.jpg",
+        "/img/tabs/post.jpg",
         "post",
         'Меню "Постное"',
         'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
@@ -219,7 +219,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const forms = document.querySelectorAll('form');
     const message = {
-        loading: 'img/form/spinner.svg',
+        loading: '/img/form/spinner.svg',
         success: 'Спасибо! Скоро мы с Вами свяжемся',
         failure: 'Что-то пошло не так'
     };
@@ -228,6 +228,9 @@ window.addEventListener('DOMContentLoaded', () => {
         postData(item);
     });
 
+    /**
+     * @param {HTMLFormElement} form Form element to listen for
+     */
     function postData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -254,7 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
             request.send(json);
 
-            request.addEventListener('load', () => {
+            request.onload = function () {
                 if (request.status === 200) {
                     console.log(request.response);
                     showThanksModal(message.success);
@@ -263,7 +266,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 } else {
                     showThanksModal(message.failure);
                 }
-            });
+            };
         });
     }
 
