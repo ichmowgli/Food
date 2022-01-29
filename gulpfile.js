@@ -57,8 +57,6 @@ gulp.task("copy-assets", () => {
     gulp.src("./src/icons/**/*.*")
         .pipe(gulp.dest(dist + "/icons"));
 
-    gulp.src("./src/server.php")
-        .pipe(gulp.dest(dist));
 
     return gulp.src("./src/img/**/*.*")
                 .pipe(gulp.dest(dist + "/img"))

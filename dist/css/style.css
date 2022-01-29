@@ -498,7 +498,6 @@ a {
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    max-height: 80vh;
     overflow-y: auto; }
   .modal__close {
     position: absolute;
