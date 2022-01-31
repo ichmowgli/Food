@@ -2864,21 +2864,11 @@ window.addEventListener('DOMContentLoaded', () => {
       this.parentSelector.append(element);
     }
 
-  }
-
-  const getResourse = async url => {
-    let res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(`Could nor fetch ${url}, status: ${res.status}`);
-    }
-
-    return await res.json();
-  }; // getResourse('http://localhost:3000/menu')
+  } // getResourse('http://localhost:3000/menu')
   //     .then(data => {
-  // data.forEach(({img, altimg, title, descr, price}) => {
-  //     new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-  // });
+  //         data.forEach(({img, altimg, title, descr, price}) => {
+  //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+  //         });
   //     });
 
 
@@ -2915,6 +2905,16 @@ window.addEventListener('DOMContentLoaded', () => {
     return await res.json();
   };
 
+  async function getResource(url) {
+    let res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+    }
+
+    return await res.json();
+  }
+
   function bindPostData(form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -2931,10 +2931,10 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(data);
         showThanksModal(message.success);
         statusMessage.remove();
+        console.log("ghbdtn");
       }).catch(() => {
         showThanksModal(message.failure);
-      }).finally(() => {
-        form.reset();
+      }).finally(() => {// form.reset();
       });
     });
   }
@@ -2958,7 +2958,52 @@ window.addEventListener('DOMContentLoaded', () => {
       prevModalDialog.classList.remove('hide');
       closeModal();
     }, 4000);
+  } //Slider
+
+
+  let slideIndex = 1;
+  const slides = document.querySelectorAll('.offer__slide'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current');
+  showSlides(slideIndex);
+
+  if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+  } else {
+    total.textContent = slides.length;
   }
+
+  function showSlides(n) {
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    slides.forEach(item => item.style.display = 'none');
+    slides[slideIndex - 1].style.display = 'block';
+
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  prev.addEventListener('click', function () {
+    plusSlides(-1);
+  });
+  next.addEventListener('click', function () {
+    plusSlides(1);
+  });
 });
 
 /***/ })
