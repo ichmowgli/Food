@@ -3753,7 +3753,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   prev.addEventListener('click', () => {
     if (offset == 0) {
-      offset == deleteNotDigits(width) * (slides.length - 1);
+      offset = deleteNotDigits(width) * (slides.length - 1);
     } else {
       offset -= deleteNotDigits(width);
     }
