@@ -295,7 +295,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let offset = 0;
 
     const slides = document.querySelectorAll('.offer__slide'),
-    slider = document.querySelector('.offer__slider'),
+        slider = document.querySelector('.offer__slider'),
         prev = document.querySelector('.offer__slider-prev'),
         next = document.querySelector('.offer__slider-next'),
         total = document.querySelector('#total'),
